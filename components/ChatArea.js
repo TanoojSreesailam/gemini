@@ -66,20 +66,14 @@ const ChatArea = () => {
   }, [activeChatId]);
 
   // Load older messages
-  const loadNextPage = () => {
-    if (
-      hasMoreMessages &&
-      !isAiTyping &&
-      messageContainerRef.current &&
-      !isFetchingOlder
-    ) {
-      setIsFetchingOlder(true);
-      prevScrollHeightRef.current = messageContainerRef.current.scrollHeight;
-      setTimeout(() => {
-        setMessagePage((prev) => prev + 1);
-      }, 500);
-    }
-  };
+  const loadNextPage = useCallback(() => {
+  if (hasMoreMessages && !isAiTyping && messageContainerRef.current && !isFetchingOlder) {
+    setIsFetchingOlder(true);
+    prevScrollHeightRef.current = messageContainerRef.current.scrollHeight;
+    setTimeout(() => setMessagePage((prev) => prev + 1), 500);
+  }
+}, [hasMoreMessages, isAiTyping, isFetchingOlder]);
+
 
   // Throttled scroll handler
   const handleScroll = useCallback(
