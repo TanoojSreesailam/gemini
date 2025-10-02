@@ -89,7 +89,7 @@ const ChatArea = () => {
           loadNextPage();
         }
       }, 100),
-    [hasMoreMessages, isAiTyping, isFetchingOlder]
+    [hasMoreMessages, isAiTyping, isFetchingOlder, loadNextPage]
   );
 
   if (!activeChatId || !activeChat) {
@@ -108,7 +108,7 @@ const ChatArea = () => {
           className="mt-2 text-md"
           style={{ color: "var(--foreground-light)" }}
         >
-          Click 'New Chat' to begin a conversation.
+          Click &apos;New Chat&apos; to begin a conversation.
         </p>
       </div>
     );
