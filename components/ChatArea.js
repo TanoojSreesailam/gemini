@@ -3,7 +3,7 @@
 import Message from "./chat/Message";
 import ChatInput from "./chat/ChatInput";
 import TypingIndicator from "./chat/TypingIndicator";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { MessageSkeletonGroup } from "./skeletons/MessageSkeleton";
 import { useAppStore } from "../store/useAppStore";
 import { throttle } from "../utils";
@@ -82,15 +82,13 @@ const ChatArea = () => {
   };
 
   // Throttled scroll handler
-  const handleScroll = useMemo(
-    () =>
-      throttle((e) => {
-        if (e.target.scrollTop < 50) {
-          loadNextPage();
-        }
-      }, 100),
-    [hasMoreMessages, isAiTyping, isFetchingOlder]
-  );
+  const handleScroll = useCallback(
+  throttle((e) => {
+    if (e.target.scrollTop < 50) loadNextPage();
+  }, 100),
+  [loadNextPage]
+);
+
 
   if (!activeChatId || !activeChat) {
     return (
