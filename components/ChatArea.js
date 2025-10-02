@@ -76,10 +76,9 @@ const ChatArea = () => {
 
 
   // Throttled scroll handler
-  const handleScroll = useCallback(
-  throttle((e) => {
-    if (e.target.scrollTop < 50) loadNextPage();
-  }, 100),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+const handleScroll = useCallback(
+  throttle((e) => { if (e.target.scrollTop < 50) loadNextPage(); }, 100),
   [loadNextPage]
 );
 
@@ -100,7 +99,7 @@ const ChatArea = () => {
           className="mt-2 text-md"
           style={{ color: "var(--foreground-light)" }}
         >
-          Click 'New Chat' to begin a conversation.
+          Click &apos;New Chat&apos; to begin a conversation.
         </p>
       </div>
     );
